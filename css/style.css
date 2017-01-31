@@ -1,1 +1,27 @@
-# Empty CSS file for your own CSS
+#menu {
+    width: 65px;
+    height: 65px;
+    background: url(../img/sprite.png) 0 0;
+}
+
+#paw {
+    width: 65px;
+    height: 65px;
+    background: url(../img/sprite.png) -73px 0;
+}
+
+#mark {
+    width: 65px;
+    height: 65px;
+    background: url(../img/sprite.png) -213px 0;
+}
+
+#looking {
+    width: 65px;
+    height: 65px;
+    background: url(../img/sprite.png) -363px 0;
+}
+
+.credits{
+    text-align: center;
+}
