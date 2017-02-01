@@ -1,4 +1,4 @@
-# Paw Neighborhoows
+# Paw Neighborhood
 By Fernanda Castillo.
 ### About it
 This project uses APIs from google maps and weather underground to show a map of the pubs in London that allows dogs inside.
