@@ -472,3 +472,16 @@ function hideListings(){
 }
 
 //Weather
+//getting the json from weather underground with my key
+var weatherUrl = "http://api.wunderground.com/api/4536789d3dff09ad/conditions/q/GB/London.json";
+
+//putting the information in a list to display on the menu
+$.getJSON(weatherUrl, function(data) {
+    var list = $(".weather ul");
+    information = data.current_observation;
+    list.append('<li>Weather: ' + information.weather + '</li>');
+    list.append('<li>Temperature: ' + information.temp_c + '° C</li>');
+    list.append('<li>Feels Like: ' + information.feelslike_c + '° F</li>');
+}).error(function(e){
+        $(".weather").append('<p>Sorry! The weather information is currently unavailable</p>');
+    });

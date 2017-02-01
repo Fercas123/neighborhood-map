@@ -25,3 +25,8 @@
 .credits{
     text-align: center;
 }
+
+#map {
+        height: 800px;
+        background-color: grey;
+      }

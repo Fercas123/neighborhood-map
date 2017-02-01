@@ -7,12 +7,6 @@
     <title>Paw Neighborhood!</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <style>
-      #map {
-        height: 800px;
-        background-color: grey;
-      }
-    </style>
   </head>
   <body>
     <div class="container-fluid">
@@ -30,25 +24,25 @@
 					<ul class="nav navbar-nav">
 						<li class="dropdown">
 							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pubs<strong class="caret"></strong></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">central 1</a>
-								</li>
-								<li class="divider">
-								</li>
-								<li>
-									<a href="#">south 1</a>
-								</li>
+							<ul class="dropdown-menu" data-bind="">
+
 							</ul>
 						</li>
 					</ul>
 					<form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
-							<input type="text" class="form-control">
+							<input type="text" id="search" class="form-control" placeholder="search">
 							<input class="btn" id="show-listings" type="button" value="Show Listings">
 							<input class="btn" id="hide-listings" type="button" value="Hide Listings">
 						</div>
 					</form>
+					<ul class="nav navbar-nav navbar-right ">
+						<li class="dropdown weather">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Should i take an umbrella?</b><strong class="caret"></strong></a>
+							<ul  class="dropdown-menu" style="margin: 0">
+            				</ul>
+						</li>
+					</ul>
 				</div>
 			</nav>
 		</div>
@@ -66,5 +60,6 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="js/knockout-3.4.1.js"></script>
   </body>
 </html>
