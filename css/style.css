@@ -1,12 +1,6 @@
-#menu {
-    width: 65px;
-    height: 65px;
-    background: url(../img/sprite.png) 0 0;
-}
-
 #paw {
-    width: 65px;
-    height: 65px;
+    width: 66px;
+    height: 66px;
     background: url(../img/sprite.png) -73px 0;
 }
 
@@ -30,3 +24,16 @@
         height: 800px;
         background-color: grey;
       }
+
+li{
+    text-align: center;
+}
+
+a:focus, a:hover{
+    text-decoration: none;
+}
+
+ul{
+    list-style-type: none;
+    padding-left: 0;
+}

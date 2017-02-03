@@ -3,7 +3,7 @@ var map;
 var markers = [];
 function initMap() {
 
-  //style for the map
+  //the styles for the vintage map
   var styles = [
   {
     "elementType": "geometry",
@@ -273,135 +273,12 @@ function initMap() {
 ];
 
     map = new google.maps.Map(document.getElementById('map'), {
-     zoom: 10,
+     zoom: 12,
      center: {lat: 51.4624745, lng: -0.0865189},
      styles: styles,
      mapTypeControl: false
-    });
 
-//this is a list of the pubs that will be marked in the map
-  var locations = [
-        {
-        title: "The Bull & Last",
-        location: {lat: 51.5589099,lng: -0.1508656,},
-        streetAddress: "168 Highgate Rd",
-        cityAddress: "London NW5 1QS",
-        url: "http://www.thebullandlast.co.uk/",
-        id: "loc1"
-        },
-        {
-        title: "The Red Lion & Sun",
-        location:{lat: 51.5726144, lng: -0.1523236},
-        streetAddress: "25 North Rd",
-        cityAddress: "London N6 4BE",
-        url: "http://www.theredlionandsun.com/",
-        id: "loc2"
-        },
-        {
-        title: "The Cellars",
-        location:{lat: 51.5505774 , lng: 0.0887055},
-        streetAddress: "125 Newington Green Rd, Mildmay Ward",
-        cityAddress: "London N1 4RA",
-        url: "http://www.thecellarsnewingtongreen.com/",
-        id: "loc3"
-        },
-        {
-        title: "The Lord Palmerston",
-        location:{lat: 51.5594425, lng: -0.1427043},
-        streetAddress: "33 Dartmouth Park Hill, Tufnell Park",
-        cityAddress: "London NW5 1HU",
-        url: "http://thelordpalmerston.com/",
-        id: "loc4"
-        },
-        {
-        title: "Brewdog",
-        location:{lat: 51.5594164, lng: -0.1755349},
-        streetAddress: "113 Bayham St",
-        cityAddress: "London NW1 0AG",
-        url: "https://www.brewdog.com/",
-        id: "loc5"
-        },
-        {
-        title: "The Wells",
-        location:{lat: 51.5569574, lng:-0.1758456 },
-        streetAddress: "30 Well Walk",
-        cityAddress: "London NW3 1BX",
-        url: "https://twitter.com/wellshampstead",
-        id: "loc6"
-        },
-        {
-        title: "The Alex",
-        location:{lat: 51.4765824, lng:-0.4249319 },
-        streetAddress: "120 Park Rd",
-        cityAddress: "London N8",
-        url: "http://www.thealex.pub/",
-        id: "loc7"
-        },
-        {
-        title: "Sir Richard Steele",
-        location:{lat:51.5468687 , lng:-0.1610136 },
-        streetAddress: "97 Haverstock Hill, Belsize Park",
-        cityAddress: "London NW3 4RL",
-        url: "http://www.faucetinn.com/sirrichardsteele/",
-        id: "loc8"
-        },
-        {
-        title: "The Spaniards Inn",
-        location:{lat:51.569902 , lng: -0.1761637 },
-        streetAddress: "Spaniards Rd, Hampstead",
-        cityAddress: "London NW3 7JJ",
-        url: "http://www.thespaniardshampstead.co.uk/",
-        id: "loc9"
-        },
-        {
-        title: "The Lord Clyde",
-        location:{lat: 51.52328, lng: -0.1102659 },
-        streetAddress: "27 Clennam St",
-        cityAddress: "London SE1 1ER",
-        url: "http://www.thelordclyde.com/home",
-        id: "loc10"
-        },
-        {
-        title: "The Windsor Castle",
-        location:{lat: 51.5063152, lng: -0.2687091 },
-        streetAddress: "114 Campden Hill Rd, Kensington",
-        cityAddress: "London W8 7AR",
-        url: "http://thewindsorcastleclapton.com/",
-        id: "loc11"
-        },
-        {
-        title: "The Kenton",
-        location:{lat: 51.5441423, lng: -0.04675},
-        streetAddress: "38 Kenton Rd",
-        cityAddress: "London E9 7AB",
-        url: "http://www.kentonpub.co.uk/website/Home.html",
-        id: "loc12"
-        },
-        {
-        title: "The Proud Archivist",
-        location:{lat:51.5368923 , lng:-0.0808339},
-        streetAddress: "2-10 Hertford Rd",
-        cityAddress: "London N1 5ET",
-        url: "http://www.theproudarchivist.co.uk/",
-        id: "loc13"
-        },
-        {
-        title: "The Water Poet",
-        location:{lat:  51.521069, lng:-0.0800587 },
-        streetAddress: "9-11 Folgate St",
-        cityAddress: "London E1 6BX",
-        url: "http://www.waterpoet.co.uk/about-the-water-poet/",
-        id: "loc14"
-        },
-        {
-        title: "People’s Park Tavern",
-        location:{lat: 51.5415307, lng: -0.0400052},
-        streetAddress: "360 Victoria Park Rd",
-        cityAddress: "London E9 7BT",
-        url: "http://peoplesparktavern.pub/",
-        id: "loc15"
-        }
-    ];
+    });
 
   var iconBase = 'img/';
   var largeInfowindow = new google.maps.InfoWindow();
@@ -428,6 +305,9 @@ function initMap() {
     markers.push(marker);
     //extend the boundaries if the marker is outside
     bounds.extend(marker.position);
+    //start will all the markers on the map
+    markers[i].setMap(map);
+    bounds.extend(markers[i].position);
     //create an onclick event to open an infowindow at each one
     marker.addListener('click', function() {
       populateInfoWindow(this, largeInfowindow);
@@ -443,6 +323,145 @@ function initMap() {
 
 }
 
+//this is a list of the pubs that will be marked in the map
+  var locations = [
+        {
+        title: "The Bull & Last",
+        location: {lat: 51.5589099,lng: -0.1508656,},
+        streetAddress: "168 Highgate Rd",
+        cityAddress: "London NW5 1QS",
+        url: "http://www.thebullandlast.co.uk/",
+        id: "loc1",
+        visible: ko.observable(true)
+        },
+        {
+        title: "The Red Lion & Sun",
+        location:{lat: 51.5726144, lng: -0.1523236},
+        streetAddress: "25 North Rd",
+        cityAddress: "London N6 4BE",
+        url: "http://www.theredlionandsun.com/",
+        id: "loc2",
+        visible: ko.observable(true)
+        },
+        {
+        title: "The Cellars",
+        location:{lat: 51.5505774 , lng: 0.0887055},
+        streetAddress: "125 Newington Green Rd, Mildmay Ward",
+        cityAddress: "London N1 4RA",
+        url: "http://www.thecellarsnewingtongreen.com/",
+        id: "loc3",
+        visible: ko.observable(true)
+        },
+        {
+        title: "The Lord Palmerston",
+        location:{lat: 51.5594425, lng: -0.1427043},
+        streetAddress: "33 Dartmouth Park Hill, Tufnell Park",
+        cityAddress: "London NW5 1HU",
+        url: "http://thelordpalmerston.com/",
+        id: "loc4",
+        visible: ko.observable(true)
+        },
+        {
+        title: "Brewdog",
+        location:{lat: 51.5594164, lng: -0.1755349},
+        streetAddress: "113 Bayham St",
+        cityAddress: "London NW1 0AG",
+        url: "https://www.brewdog.com/",
+        id: "loc5",
+        visible: ko.observable(true)
+        },
+        {
+        title: "The Wells",
+        location:{lat: 51.5569574, lng:-0.1758456 },
+        streetAddress: "30 Well Walk",
+        cityAddress: "London NW3 1BX",
+        url: "https://twitter.com/wellshampstead",
+        id: "loc6",
+        visible: ko.observable(true)
+        },
+        {
+        title: "The Alex",
+        location:{lat: 51.4765824, lng:-0.4249319 },
+        streetAddress: "120 Park Rd",
+        cityAddress: "London N8",
+        url: "http://www.thealex.pub/",
+        id: "loc7",
+        visible: ko.observable(true)
+        },
+        {
+        title: "Sir Richard Steele",
+        location:{lat:51.5468687 , lng:-0.1610136 },
+        streetAddress: "97 Haverstock Hill, Belsize Park",
+        cityAddress: "London NW3 4RL",
+        url: "http://www.faucetinn.com/sirrichardsteele/",
+        id: "loc8",
+        visible: ko.observable(true)
+        },
+        {
+        title: "The Spaniards Inn",
+        location:{lat:51.569902 , lng: -0.1761637 },
+        streetAddress: "Spaniards Rd, Hampstead",
+        cityAddress: "London NW3 7JJ",
+        url: "http://www.thespaniardshampstead.co.uk/",
+        id: "loc9",
+        visible: ko.observable(true)
+        },
+        {
+        title: "The Lord Clyde",
+        location:{lat: 51.52328, lng: -0.1102659 },
+        streetAddress: "27 Clennam St",
+        cityAddress: "London SE1 1ER",
+        url: "http://www.thelordclyde.com/home",
+        id: "loc10",
+        visible: ko.observable(true)
+        },
+        {
+        title: "The Windsor Castle",
+        location:{lat: 51.5063152, lng: -0.2687091 },
+        streetAddress: "114 Campden Hill Rd, Kensington",
+        cityAddress: "London W8 7AR",
+        url: "http://thewindsorcastleclapton.com/",
+        id: "loc11",
+        visible: ko.observable(true)
+        },
+        {
+        title: "The Kenton",
+        location:{lat: 51.5441423, lng: -0.04675},
+        streetAddress: "38 Kenton Rd",
+        cityAddress: "London E9 7AB",
+        url: "http://www.kentonpub.co.uk/website/Home.html",
+        id: "loc12",
+        visible: ko.observable(true)
+        },
+        {
+        title: "The Proud Archivist",
+        location:{lat:51.5368923 , lng:-0.0808339},
+        streetAddress: "2-10 Hertford Rd",
+        cityAddress: "London N1 5ET",
+        url: "http://www.theproudarchivist.co.uk/",
+        id: "loc13",
+        visible: ko.observable(true)
+        },
+        {
+        title: "The Water Poet",
+        location:{lat:  51.521069, lng:-0.0800587 },
+        streetAddress: "9-11 Folgate St",
+        cityAddress: "London E1 6BX",
+        url: "http://www.waterpoet.co.uk/about-the-water-poet/",
+        id: "loc14",
+        visible: ko.observable(true)
+        },
+        {
+        title: "People’s Park Tavern",
+        location:{lat: 51.5415307, lng: -0.0400052},
+        streetAddress: "360 Victoria Park Rd",
+        cityAddress: "London E9 7BT",
+        url: "http://peoplesparktavern.pub/",
+        id: "loc15",
+        visible: ko.observable(true)
+        }
+    ];
+
 function populateInfoWindow(marker, infowindow) {
   if (infowindow.marker != marker) {
     infowindow.marker = marker;
@@ -454,8 +473,7 @@ function populateInfoWindow(marker, infowindow) {
     });
   }
 }
-
-
+//shows all the pins and alters the bounds so that all can fit
 function showListings(){
   var bounds = new google.maps.LatLngBounds();
   for (var i=0; i < markers.length; i++){
@@ -464,12 +482,52 @@ function showListings(){
   }
     map.fitBounds(bounds);
 }
-
+//it just hides them all... they are there but hidden
 function hideListings(){
   for (var i=0; i < markers.length; i++){
     markers[i].setMap(null);
   }
 }
+//filter the results to what matches the search box
+var show = {
+    searchBox: ko.observable(''),
+};
+show.locations = ko.dependentObservable(function() {
+    var self = this;
+    var search = self.searchBox().toLowerCase();
+    return ko.utils.arrayFilter(locations, function(location) {
+    if (location.title.toLowerCase().indexOf(search) >= 0) {
+            location.inSearch = true;
+            return location.visible(true);
+        } else {
+            location.inSearch = false;
+            return location.visible(false);
+        }
+    });
+}, show);
+ko.applyBindings(show);
+
+
+/////////////////////////
+
+//i need to show and hide the markers that are not on the search box
+function showMarkers() {
+  for (var i = 0; i < locations.length; i++){
+    if(locations[i].inSearch= true){
+      markers[i].setMap(map);
+    }else{
+      markers[i].setMap(null);
+    }
+  }
+}
+//trigger showmarkers depending on the input of the searchbox
+$("#input").keyup(function() {
+showMarkers();
+});
+
+//if click on the list element, display the marker on the map
+
+//////
 
 //Weather
 //getting the json from weather underground with my key
