@@ -311,6 +311,7 @@ function initMap() {
     //create an onclick event to open an infowindow at each one
     marker.addListener('click', function() {
       populateInfoWindow(this, largeInfowindow);
+      console.log(this)
       if (this.getAnimation() !== null) {
           this.setAnimation(null);
         } else {
@@ -331,8 +332,7 @@ function initMap() {
         streetAddress: "168 Highgate Rd",
         cityAddress: "London NW5 1QS",
         url: "http://www.thebullandlast.co.uk/",
-        id: "loc1",
-        visible: ko.observable(true)
+        visible: ko.observable(true),
         },
         {
         title: "The Red Lion & Sun",
@@ -340,7 +340,6 @@ function initMap() {
         streetAddress: "25 North Rd",
         cityAddress: "London N6 4BE",
         url: "http://www.theredlionandsun.com/",
-        id: "loc2",
         visible: ko.observable(true)
         },
         {
@@ -349,7 +348,6 @@ function initMap() {
         streetAddress: "125 Newington Green Rd, Mildmay Ward",
         cityAddress: "London N1 4RA",
         url: "http://www.thecellarsnewingtongreen.com/",
-        id: "loc3",
         visible: ko.observable(true)
         },
         {
@@ -358,7 +356,6 @@ function initMap() {
         streetAddress: "33 Dartmouth Park Hill, Tufnell Park",
         cityAddress: "London NW5 1HU",
         url: "http://thelordpalmerston.com/",
-        id: "loc4",
         visible: ko.observable(true)
         },
         {
@@ -367,7 +364,6 @@ function initMap() {
         streetAddress: "113 Bayham St",
         cityAddress: "London NW1 0AG",
         url: "https://www.brewdog.com/",
-        id: "loc5",
         visible: ko.observable(true)
         },
         {
@@ -376,7 +372,6 @@ function initMap() {
         streetAddress: "30 Well Walk",
         cityAddress: "London NW3 1BX",
         url: "https://twitter.com/wellshampstead",
-        id: "loc6",
         visible: ko.observable(true)
         },
         {
@@ -385,7 +380,6 @@ function initMap() {
         streetAddress: "120 Park Rd",
         cityAddress: "London N8",
         url: "http://www.thealex.pub/",
-        id: "loc7",
         visible: ko.observable(true)
         },
         {
@@ -394,7 +388,6 @@ function initMap() {
         streetAddress: "97 Haverstock Hill, Belsize Park",
         cityAddress: "London NW3 4RL",
         url: "http://www.faucetinn.com/sirrichardsteele/",
-        id: "loc8",
         visible: ko.observable(true)
         },
         {
@@ -403,7 +396,6 @@ function initMap() {
         streetAddress: "Spaniards Rd, Hampstead",
         cityAddress: "London NW3 7JJ",
         url: "http://www.thespaniardshampstead.co.uk/",
-        id: "loc9",
         visible: ko.observable(true)
         },
         {
@@ -412,7 +404,6 @@ function initMap() {
         streetAddress: "27 Clennam St",
         cityAddress: "London SE1 1ER",
         url: "http://www.thelordclyde.com/home",
-        id: "loc10",
         visible: ko.observable(true)
         },
         {
@@ -421,7 +412,6 @@ function initMap() {
         streetAddress: "114 Campden Hill Rd, Kensington",
         cityAddress: "London W8 7AR",
         url: "http://thewindsorcastleclapton.com/",
-        id: "loc11",
         visible: ko.observable(true)
         },
         {
@@ -430,7 +420,6 @@ function initMap() {
         streetAddress: "38 Kenton Rd",
         cityAddress: "London E9 7AB",
         url: "http://www.kentonpub.co.uk/website/Home.html",
-        id: "loc12",
         visible: ko.observable(true)
         },
         {
@@ -439,7 +428,6 @@ function initMap() {
         streetAddress: "2-10 Hertford Rd",
         cityAddress: "London N1 5ET",
         url: "http://www.theproudarchivist.co.uk/",
-        id: "loc13",
         visible: ko.observable(true)
         },
         {
@@ -448,7 +436,6 @@ function initMap() {
         streetAddress: "9-11 Folgate St",
         cityAddress: "London E1 6BX",
         url: "http://www.waterpoet.co.uk/about-the-water-poet/",
-        id: "loc14",
         visible: ko.observable(true)
         },
         {
@@ -457,10 +444,14 @@ function initMap() {
         streetAddress: "360 Victoria Park Rd",
         cityAddress: "London E9 7BT",
         url: "http://peoplesparktavern.pub/",
-        id: "loc15",
         visible: ko.observable(true)
         }
     ];
+
+//create an array where locations are linked to a marker
+locations.forEach(function(locations, i){
+  locations.markers = markers[i];
+})
 
 function populateInfoWindow(marker, infowindow) {
   if (infowindow.marker != marker) {
@@ -492,7 +483,13 @@ function hideListings(){
 var show = {
     searchBox: ko.observable(''),
 };
+showMyMarker = function(){
+  console.log(this);
+
+  }
+
 show.locations = ko.dependentObservable(function() {
+      var info = ko.observable(0);
     var self = this;
     var search = self.searchBox().toLowerCase();
     return ko.utils.arrayFilter(locations, function(location) {
@@ -506,6 +503,7 @@ show.locations = ko.dependentObservable(function() {
     });
 }, show);
 ko.applyBindings(show);
+
 
 
 /////////////////////////
