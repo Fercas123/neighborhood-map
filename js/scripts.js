@@ -274,7 +274,7 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), {
      zoom: 12,
-     center: {lat: 51.4624745, lng: -0.0865189},
+     center: {lat: 51.5624745, lng: -0.0865189},
      styles: styles,
      mapTypeControl: false
 
@@ -303,25 +303,28 @@ function initMap() {
     });
     //push the marker to the array
     markers.push(marker);
-    //extend the boundaries if the marker is outside
-    bounds.extend(marker.position);
+    //create an array where locations are linked to a marker
+    locations.forEach(function(location, i){
+      location.marker = markers[i];
+    })
     //start will all the markers on the map
     markers[i].setMap(map);
+    //extend the boundaries if the marker is outside
     bounds.extend(markers[i].position);
     //create an onclick event to open an infowindow at each one
     marker.addListener('click', function() {
       populateInfoWindow(this, largeInfowindow);
-      console.log(this)
       if (this.getAnimation() !== null) {
           this.setAnimation(null);
         } else {
           this.setAnimation(google.maps.Animation.BOUNCE);
+          stopAnimation(this);
+
         }
     });
   }
   document.getElementById('show-listings').addEventListener('click', showListings);
   document.getElementById('hide-listings').addEventListener('click', hideListings);
-
 }
 
 //this is a list of the pubs that will be marked in the map
@@ -448,10 +451,6 @@ function initMap() {
         }
     ];
 
-//create an array where locations are linked to a marker
-locations.forEach(function(locations, i){
-  locations.markers = markers[i];
-})
 
 function populateInfoWindow(marker, infowindow) {
   if (infowindow.marker != marker) {
@@ -463,6 +462,12 @@ function populateInfoWindow(marker, infowindow) {
       infowindow.marker = null;
     });
   }
+}
+//stop the marker from bouncing
+function stopAnimation(marker) {
+    setTimeout(function () {
+        marker.setAnimation(null);
+    }, 3000);
 }
 //shows all the pins and alters the bounds so that all can fit
 function showListings(){
@@ -479,15 +484,23 @@ function hideListings(){
     markers[i].setMap(null);
   }
 }
+//if click on the list element, display the marker on the map
+function showMyMarker(){
+    var largeInfowindow = new google.maps.InfoWindow();
+    var i = this.marker;
+    populateInfoWindow(i, largeInfowindow);
+    if (i.getAnimation() !== null) {
+          i.setAnimation(null);
+        } else {
+          i.setAnimation(google.maps.Animation.BOUNCE);
+          stopAnimation(i);
+        }
+  }
+
 //filter the results to what matches the search box
 var show = {
     searchBox: ko.observable(''),
 };
-showMyMarker = function(){
-  console.log(this);
-
-  }
-
 show.locations = ko.dependentObservable(function() {
       var info = ko.observable(0);
     var self = this;
@@ -504,14 +517,10 @@ show.locations = ko.dependentObservable(function() {
 }, show);
 ko.applyBindings(show);
 
-
-
-/////////////////////////
-
-//i need to show and hide the markers that are not on the search box
+//show and hide the markers that are not on the search box
 function showMarkers() {
-  for (var i = 0; i < locations.length; i++){
-    if(locations[i].inSearch= true){
+  for (var i=0; i < markers.length; i++){
+    if(locations[i].inSearch === true){
       markers[i].setMap(map);
     }else{
       markers[i].setMap(null);
@@ -522,10 +531,6 @@ function showMarkers() {
 $("#input").keyup(function() {
 showMarkers();
 });
-
-//if click on the list element, display the marker on the map
-
-//////
 
 //Weather
 //getting the json from weather underground with my key
