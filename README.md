@@ -21,7 +21,7 @@ To create your own map, you can refere to the following documentation
 
 ### Check Paw Neighborhood!
 
-You can visit Paw Neighborhood [Here](https://fercas123.github.io/neighborhood-map/)
+You can visit Paw Neighborhood [Here](http://fercas123.github.io/neighborhood-map/)
 
 **Hope you and your pup find a nice Pub!**
 
