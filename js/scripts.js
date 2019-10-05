@@ -534,7 +534,7 @@ showMarkers();
 
 //Weather
 //getting the json from weather underground with my key
-var weatherUrl = "http://api.wunderground.com/api/4536789d3dff09ad/conditions/q/GB/London.json";
+var weatherUrl = "https://api.wunderground.com/api/4536789d3dff09ad/conditions/q/GB/London.json";
 
 //putting the information in a list to display on the menu
 $.getJSON(weatherUrl, function(data) {
